@@ -9,6 +9,7 @@ const variable = document.getElementById("panel-variable");
 
 const irInicio = document.querySelector("#ir-inicio");
 const irAgregarVehiculo = document.querySelector("#ir_agregarVehiculo");
+const irEliminarVehiculo = document.querySelector("#ir_eliminarVehiculo");
 
 irInicio.addEventListener("click", () => {
   variable.innerHTML = "";
@@ -21,6 +22,11 @@ irAgregarVehiculo.addEventListener("click", async () => {
   variable.append(nose);
 });
 
+irEliminarVehiculo.addEventListener("click", ()=> {
+  variable.innerHTML = "";
+  
+})
+
 const listaLiBtn = document.querySelectorAll(".li__btn");
 
 listaLiBtn.forEach((e) => {
@@ -31,4 +37,3 @@ listaLiBtn.forEach((e) => {
     e.classList.add("active");
   });
 });
-

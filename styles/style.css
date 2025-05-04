@@ -47,7 +47,6 @@ body{
 #app{
   margin-top: 70px;
   padding: 10px;
-  position: relative;
   width: 100%;
   display: flex;
   gap: 30px;
@@ -128,4 +127,81 @@ body{
     /* no pude hacer sucede la transicion, porque no tengo mi hover */
     transition: all 0.3s linear;
   }
+}
+
+#dialog{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 4px 10px;
+  width: 45%;
+  max-width: 300px; 
+  background-color: white;
+  border-radius: 18px;
+
+  animation: show-modal 0.4s linear;
+
+  
+  &::backdrop{
+    background-color: #242424bb;
+  }
+}
+
+@keyframes show-modal {
+  0%{
+    scale: 0.7;
+    opacity: 0;
+    top: 0%;
+  }
+  100%{
+    scale: 1;
+    opacity: 1;
+    top: 50%;
+  }
+  
+}
+
+#dialog__img{
+  width: 20%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+}
+#dialog__p{
+  width: 100%;
+  color: black;
+  font-size: 18px;
+  text-align: center;
+}
+#cerrar-dialog{
+  margin-top: 16px;
+  width: 100%;
+  padding: 10px 20px;
+  color: white;
+  background-color: rgb(28, 182, 23);
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 8px;
+
+  transition: all 0.2s ease-out;
+
+  &:hover{
+    filter: brightness(120%);
+
+  }
+}
+
+.section-buscados{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.target-buscado{
+  background-color: #5c29e9;
+  border-radius: 12px;
+  min-height: 100px;
 }

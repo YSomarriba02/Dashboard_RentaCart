@@ -20,7 +20,11 @@
               Agregar Vehiculo
             </button>
           </li>
-          <li><button class="li__btn">Eliminar Vehiculo</button></li>
+          <li>
+            <button class="li__btn" id="ir_eliminarVehiculo">
+              Eliminar Vehiculo
+            </button>
+          </li>
           <li><button class="li__btn">Editar vehiculo</button></li>
           <li><button class="li__btn">Monitorear</button></li>
           <li><button class="li__btn">Agregar Usuario</button></li>
@@ -33,31 +37,63 @@
         </ul>
       </section>
       <div id="panel-variable">
-        <!-- <form action="">
-          <div class="input_box">
-            <label for="marca">Seleccione Marca</label>
-            <select name="marca" id="marca">
-              <option value="toyota">toyota</option>
-              <option value="toyota">toyota</option>
-              <option value="toyota">toyota</option>
-              <option value="toyota">toyota</option>
-              <option value="toyota">toyota</option>
-              <option value="toyota">toyota</option>
-            </select>
-          </div>
+        <main class="main-agregarVehiculo">
+          <h3>Eliminar Vehiculo</h3>
+
           <div class="input-box">
-            <label for="modelo">Seleccione Modelo</label>
-            <select name="modelo" id="modelo">
-              <option value="corolla">Corolla</option>
-              <option value="corolla">Corolla</option>
-              <option value="corolla">Corolla</option>
-              <option value="corolla">Corolla</option>
-            </select>
+            <label for="placa">Ingrese la placa</label>
+            <input type="text" id="placa" name="placa" placeholder="M180988" />
           </div>
-        </form> -->
+          <div class="buscarsecciones">
+            <label for="buscar">Buscar por?</label>
+            <select name="buscar" id="buscarPor">
+              <option value="marcas">Marcas</option>
+              <option value="yeear">Año</option>
+              <option value="tipos">Tipo Vehiculo</option>
+            </select>
+            <button id="btn-buscarPor">Buscar</button>
+          </div>
+
+          <section class="section-buscados">
+            <div class="target-buscado">
+              <h5>asas</h5>
+            </div>
+            <div class="target-buscado">
+              <h5>asaas</h5>
+            </div>
+            <div class="target-buscado">
+              <h5>asass</h5>
+            </div>
+          </section>
+        </main>
       </div>
     </div>
 
+    <dialog id="dialog">
+      <img src="" alt="" id="dialog__img" />
+      <p id="dialog__p"></p>
+      <button id="cerrar-dialog" class="btn-dialog">Cerrar</button>
+    </dialog>
     <script type="module" src="/main.js"></script>
+    <script>
+      const buscarPor = document.querySelector("#buscarPor");
+      const btnBuscarPor = document.querySelector("#btn-buscarPor");
+
+      btnBuscarPor.addEventListener("click", async () => {
+        const filtrado = buscarPor.value;
+
+        const fetching = await fetch(
+          `http://localhost:3000/getQueryVehiculos?filtrado=${filtrado}`
+        );
+        const repuesta = await fetching.json();
+        console.log(repuesta);
+
+        const fragment = document.createRange().createContextualFragment(`
+              <div class="target-buscado">
+                <h5>asaas</h5>
+              </div>
+        `);
+      });
+    </script>
   </body>
 </html>

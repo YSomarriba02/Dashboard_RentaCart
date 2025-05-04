@@ -5,8 +5,6 @@ export async function fetchMarcas() {
     console.log(repuesta);
     return repuesta;
   } catch (error) {
-    console.error(error);
-    alert("no marcas");
-    return;
+    return undefined;
   }
 }
