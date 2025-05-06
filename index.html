@@ -12,7 +12,8 @@
     </header>
 
     <div id="app">
-      <section id="panel-control">
+      <section class="panel-control">
+        <button id="menu">Btn</button>
         <ul id="panel-control__ul">
           <li><button class="li__btn" id="ir-inicio">Inicio</button></li>
           <li>
@@ -25,47 +26,30 @@
               Eliminar Vehiculo
             </button>
           </li>
-          <li><button class="li__btn">Editar vehiculo</button></li>
           <li><button class="li__btn">Monitorear</button></li>
           <li><button class="li__btn">Agregar Usuario</button></li>
           <li><button class="li__btn">Eliminar Usuario</button></li>
-          <li><button class="li__btn">Editar Usuario</button></li>
           <li><button class="li__btn">Ver Usuarios</button></li>
           <li><button class="li__btn">Agregar Marca</button></li>
           <li><button class="li__btn">Eliminar Marca</button></li>
-          <li><button class="li__btn">Editar Marca</button></li>
         </ul>
       </section>
       <div id="panel-variable">
-        <main class="main-agregarVehiculo">
+        <!-- <main class="main-agregarVehiculo">
           <h3>Eliminar Vehiculo</h3>
 
           <div class="input-box">
             <label for="placa">Ingrese la placa</label>
-            <input type="text" id="placa" name="placa" placeholder="M180988" />
-          </div>
-          <div class="buscarsecciones">
-            <label for="buscar">Buscar por?</label>
-            <select name="buscar" id="buscarPor">
-              <option value="marcas">Marcas</option>
-              <option value="yeear">Año</option>
-              <option value="tipos">Tipo Vehiculo</option>
-            </select>
-            <button id="btn-buscarPor">Buscar</button>
+            <input
+              type="text"
+              id="buscador-placa"
+              name="placa"
+              placeholder="M180988"
+            />
           </div>
 
-          <section class="section-buscados">
-            <div class="target-buscado">
-              <h5>asas</h5>
-            </div>
-            <div class="target-buscado">
-              <h5>asaas</h5>
-            </div>
-            <div class="target-buscado">
-              <h5>asass</h5>
-            </div>
-          </section>
-        </main>
+          <section class="section-buscados"></section>
+        </main> -->
       </div>
     </div>
 
@@ -74,25 +58,112 @@
       <p id="dialog__p"></p>
       <button id="cerrar-dialog" class="btn-dialog">Cerrar</button>
     </dialog>
+
     <script type="module" src="/main.js"></script>
-    <script>
-      const buscarPor = document.querySelector("#buscarPor");
-      const btnBuscarPor = document.querySelector("#btn-buscarPor");
+    <!-- <script>
+      const buscadorPlaca = document.querySelector("#buscador-placa");
+      buscadorPlaca.addEventListener("input", (event) => {
+        const value = event.target.value.toLowerCase();
 
-      btnBuscarPor.addEventListener("click", async () => {
-        const filtrado = buscarPor.value;
-
-        const fetching = await fetch(
-          `http://localhost:3000/getQueryVehiculos?filtrado=${filtrado}`
-        );
+        const cards = document.querySelectorAll(".card__vehiculo");
+        cards.forEach((e) => {
+          const content = e.textContent.toLowerCase();
+          if (!content.includes(value)) {
+            e.classList.remove("show");
+            e.classList.add("ocultar");
+            return;
+          }
+          e.classList.remove("ocultar");
+          e.classList.add("show");
+        });
+      });
+      document.addEventListener("DOMContentLoaded", async () => {
+        const fetching = await fetch(`http://localhost:3000/getVehiculos`);
         const repuesta = await fetching.json();
         console.log(repuesta);
 
         const fragment = document.createRange().createContextualFragment(`
-              <div class="target-buscado">
-                <h5>asaas</h5>
-              </div>
+            <section section class="card__vehiculo">
+                  <div class="card__top">
+                    <div class="vehiculo__data">
+                      <p class="data__modelo"></p>
+                    </div>
+                    <img
+                      src=""
+                      alt="toyota yaris"
+                      class="vehiculo__img"
+                    />
+                  </div>
+                  <hr />
+                  <div class="card__bottom">
+                    <div class="v__data">
+                      <p class="v__yeear">2010</p>
+                      <p class="v__tipo"></p>
+                      <p class="v__placa"></p>
+                    </div>
+                    <button class="vehiculo__buttom">Eliminar</button>
+                  </div>
+                </section>
         `);
+
+        const pegar = document.querySelector(".section-buscados");
+        //
+
+        for (let i = 0; i < repuesta.length; i++) {
+          const vehiculo = repuesta[i];
+          const nombreMarca = vehiculo.Marca.marca;
+          const nombreModelo = vehiculo.Modelo.modelo;
+          const dataConcat = `${nombreMarca} ${nombreModelo}`;
+          const url =
+            "https://pibmgbatahdbrcdxjqbv.supabase.co/storage/v1/object/public/autosimagenes/" +
+            vehiculo.imagenURL;
+
+          const nuevo = fragment.cloneNode(true);
+          const data = nuevo.querySelector(".data__modelo");
+          const img = nuevo.querySelector(".vehiculo__img");
+          const placa = nuevo.querySelector(".v__placa");
+          const tipo = nuevo.querySelector(".v__tipo");
+          const btnEliminar = nuevo.querySelector(".vehiculo__buttom");
+
+          data.textContent = dataConcat;
+          img.setAttribute("src", url);
+          placa.textContent = vehiculo.placa;
+          tipo.textContent = vehiculo.Tipo.tipo;
+
+          btnEliminar.addEventListener("click", async () => {
+            const placaVehiculo = repuesta[i].placa;
+            const fetchingBorrado = await fetch(
+              `http://localhost:3000/deleteVehiculo?borrar=${placaVehiculo}`,
+              {
+                method: "DELETE",
+              }
+            );
+            const borrado = await fetchingBorrado.text();
+            console.log(borrado);
+          });
+
+          pegar.append(nuevo);
+        }
+      });
+    </script> -->
+
+    <script>
+      let estado = true;
+      const btn = document.querySelector("#menu");
+      const panelControl = document.querySelector(".panel-control");
+      const ul = document.querySelector("ul");
+      const lis = ul.querySelectorAll("li");
+
+      btn.addEventListener("click", () => {
+        if (estado) {
+          estado = false;
+          ul.style.display = "none";
+          panelControl.classList.add("maxcontent");
+          return;
+        }
+        estado = true;
+        ul.style.display = "flex";
+        panelControl.classList.remove("maxcontent");
       });
     </script>
   </body>

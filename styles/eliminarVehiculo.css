@@ -1,0 +1,122 @@
+#buscador-placa{
+    padding: 10px 20px;
+  }
+  
+  .section-buscados{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 100%;
+    gap: 20px 16px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  
+    border: 1px solid white;
+  }
+  
+  
+  .card__vehiculo {
+    border: solid black 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    width: 100%;
+    background-color: white;
+  
+    hr {
+      color: black;
+    }
+  }
+  
+  .card__top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 10px;
+  }
+  
+  .vehiculo__data {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+  
+    .data__modelo {
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+  }
+  
+  .vehiculo__img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  .card__bottom {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .v__yeear{
+    position: absolute;
+    background-color: #ffffff;
+    width: 30%;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    border: solid black 1px;
+    border-radius: 28px;
+  }
+  
+  
+  .v__data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    width: 50%;
+  
+    .v__placa {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+  
+    .v__tipo {
+      font-size: 1.2rem;
+    }
+  }
+  
+  .vehiculo__buttom {
+    padding: 10px 10px;
+    background-image: linear-gradient(rgb(255, 30, 0), black);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+  }
+  
+  
+  .ocultar{
+    display: none;
+  }
+  .show{
+    display: flex;
+  }
+
+
+
+  @media(max-width: 490px){
+    .section-buscados{
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    }
+  }

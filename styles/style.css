@@ -52,12 +52,13 @@ body{
   gap: 30px;
 }
 
-#panel-control{
+.panel-control{
   position: sticky;
   top: 80px;
-  height: 600px;
-  width: 20%;
+  height: max-content;
+  width: 30%;
   display: flex;
+  gap: 20px;
   flex-direction: column;
   justify-content: center;
   color: black;
@@ -66,7 +67,7 @@ body{
 
 }
 
-#panel-control #panel-control__ul{
+.panel-control #panel-control__ul{
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -98,6 +99,8 @@ body{
 
 #panel-variable{
   width: 100%;
+  min-width: 220px;
+
 
   background-color: #ffffff;
   border: solid black 1px;
@@ -193,15 +196,40 @@ body{
   }
 }
 
-.section-buscados{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  width: 100%;
+
+
+
+@media(max-width: 800px){
+  .panel-control{
+    position: fixed;
+    z-index: 10;
+    width: 40%;
+    border: solid black 1px;
+  }
+
+  #menu{
+    width: 150px;
+    position: relative;
+    top: 0px;
+    padding: 10px 20px;
+    color: black;
+  }
+
+  .panel-control #panel-control__ul{
+    gap: 15px;
+  }
 }
 
-.target-buscado{
-  background-color: #5c29e9;
-  border-radius: 12px;
-  min-height: 100px;
+.maxcontent{
+  width: max-content;
+}
+
+
+
+
+@media(max-width: 490px){
+
+  body{
+    padding: 24px 18px;
+  }
 }

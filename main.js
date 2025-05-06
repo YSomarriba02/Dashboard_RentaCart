@@ -4,6 +4,7 @@ import { inicio } from "./JS/inicio.js";
 // import { fetchMarcas } from "./JS/AgregarVehiculo/fetchMarcas.js";
 
 import { agregarV } from "./JS/AgregarVehiculo/agregarVehiculo.js";
+import { eliminarVehiculo } from "./JS/EliminarVehiculo/eliminarVehiculo.js";
 
 const variable = document.getElementById("panel-variable");
 
@@ -22,10 +23,11 @@ irAgregarVehiculo.addEventListener("click", async () => {
   variable.append(nose);
 });
 
-irEliminarVehiculo.addEventListener("click", ()=> {
+irEliminarVehiculo.addEventListener("click", async () => {
   variable.innerHTML = "";
-  
-})
+  const eliminarV = await eliminarVehiculo();
+  variable.append(eliminarV);
+});
 
 const listaLiBtn = document.querySelectorAll(".li__btn");
 

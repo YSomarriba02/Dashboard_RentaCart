@@ -77,7 +77,7 @@ export const agregarVehiculo = document.createRange().createContextualFragment(`
                     </div>
 
                     <div class="input-box">
-                        <label for="imagen">Imagen Vehiculo jpg/jpeg</label>
+                        <label for="imagen">Imagen Vehiculo jpg</label>
                         <input type="file" name="img" required></input>
                     </div>
                 </div>
