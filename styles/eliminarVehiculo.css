@@ -1,8 +1,43 @@
-#buscador-placa{
-    padding: 10px 20px;
+
+
+.main-eliminarVehiculo{
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: main 0.5s ease-in;
+
+}
+
+@keyframes main{
+  from{
+    opacity: 0.7;
+    transform: translateY(-300px);
   }
-  
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#titulo-eliminar-vehiculo{
+  padding-left: 20px;
+  font-size: 30px;
+}
+#eliminar-input{
+  padding: 0px 24px;
+  margin-bottom: 50px;
+
+
+  label{
+    font-size: 18px;
+    text-align: center;
+  }
+}
+
+
   .section-buscados{
+    padding: 0 12px;
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -22,8 +57,9 @@
     gap: 10px;
   
     width: 100%;
-    background-color: white;
-  
+    border-radius: 18px;
+    overflow: hidden;
+    animation: card_entrada 0.4s ease-in forwards;
     hr {
       color: black;
     }
@@ -50,9 +86,11 @@
   }
   
   .vehiculo__img {
+    border-radius: 12px;
     width: 100%;
-    height: auto;
+    height: 200px;
     object-fit: contain;
+
   }
   
   .card__bottom {
@@ -63,6 +101,7 @@
   
     align-items: center;
     padding: 10px;
+    background-color: rgb(206, 203, 200);
   }
   
   .v__yeear{
@@ -119,4 +158,18 @@
     .section-buscados{
       grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     }
+  }
+
+  @keyframes card_entrada {
+    0%{
+      opacity: 0;
+      scale: 0.7;
+      transform: translateX(300px);
+    }
+    100%{
+      scale: 1;
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
   }

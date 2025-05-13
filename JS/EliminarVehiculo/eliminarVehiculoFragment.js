@@ -1,10 +1,9 @@
 export const eliminarVehiculoFragment = document.createRange()
   .createContextualFragment(`
         <main class="main-eliminarVehiculo">
-          <h3>Eliminar Vehiculo</h3>
+          <h3 id="titulo-eliminar-vehiculo">Eliminar Vehiculo</h3>
 
-          <div class="input-box">
-            <label for="placa">Ingrese la placa</label>
+          <div class="input-box" id="eliminar-input">
             <input
               type="text"
               id="buscador-placa"

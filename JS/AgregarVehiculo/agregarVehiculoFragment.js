@@ -63,12 +63,9 @@ export const agregarVehiculo = document.createRange().createContextualFragment(`
 
                     <div class="input-box">
                         <label for="color">Color</label>
-                        <input type="color" id="color" name="color"></input>
-                    </div>
-
-                    <div class="input-box">
-                        <label for="precioDia">Precio x Día $</label>
-                        <input type="number" id="precioDia" step="0.01" placeholder="0.01" value=10.99 name="precio" required></input>
+                        <div id="input-color-envoltorio">
+                            <input type="color" id="color" name="color"></input>
+                        </div>
                     </div>
 
                     <div class="input-box">

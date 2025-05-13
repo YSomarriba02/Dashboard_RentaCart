@@ -12,7 +12,7 @@ export async function eliminarVehiculo() {
 
     const cards = document.querySelectorAll(".card__vehiculo");
     cards.forEach((e) => {
-      const content = e.textContent.toLowerCase();
+      const content = e.textContent.split("Eliminar").join("").toLowerCase();
       if (!content.includes(value)) {
         e.classList.remove("show");
         e.classList.add("ocultar");
@@ -23,35 +23,36 @@ export async function eliminarVehiculo() {
     });
   });
 
-  mainEliminar.addEventListener("click", async () => {
+  try {
     const fetching = await fetch(`http://localhost:3000/getVehiculos`);
+    if (!fetching.ok) throw new Error("No conect");
     const repuesta = await fetching.json();
     console.log(repuesta);
 
     const cardVehiculoFragment = document.createRange()
       .createContextualFragment(`
-            <section class="card__vehiculo">
-                  <div class="card__top">
-                    <div class="vehiculo__data">
-                      <p class="data__modelo"></p>
+              <section class="card__vehiculo">
+                    <div class="card__top">
+                      <div class="vehiculo__data">
+                        <p class="data__modelo"></p>
+                      </div>
+                      <img
+                        src=""
+                        alt="toyota yaris"
+                        class="vehiculo__img"
+                      />
                     </div>
-                    <img
-                      src=""
-                      alt="toyota yaris"
-                      class="vehiculo__img"
-                    />
-                  </div>
-                  <hr />
-                  <div class="card__bottom">
-                    <div class="v__data">
-                      <p class="v__yeear">2010</p>
-                      <p class="v__tipo"></p>
-                      <p class="v__placa"></p>
+                    <hr />
+                    <div class="card__bottom">
+                      <div class="v__data">
+                        <p class="v__yeear"></p>
+                        <p class="v__tipo"></p>
+                        <p class="v__placa"></p>
+                      </div>
+                      <button class="vehiculo__buttom">Eliminar</button>
                     </div>
-                    <button class="vehiculo__buttom">Eliminar</button>
-                  </div>
-                </section>
-        `);
+                  </section>
+          `);
 
     const sectionBuscados = mainEliminar.querySelector(".section-buscados");
 
@@ -68,29 +69,58 @@ export async function eliminarVehiculo() {
       const data = nuevo.querySelector(".data__modelo");
       const img = nuevo.querySelector(".vehiculo__img");
       const placa = nuevo.querySelector(".v__placa");
+      const yeear = nuevo.querySelector(".v__yeear");
       const tipo = nuevo.querySelector(".v__tipo");
       const btnEliminar = nuevo.querySelector(".vehiculo__buttom");
 
       data.textContent = dataConcat;
       img.setAttribute("src", url);
       placa.textContent = vehiculo.placa;
+      yeear.textContent = vehiculo.yeear;
       tipo.textContent = vehiculo.Tipo.tipo;
 
-      btnEliminar.addEventListener("click", async () => {
+      btnEliminar.addEventListener("click", async (event) => {
         const placaVehiculo = repuesta[i].placa;
-        const fetchingBorrado = await fetch(
-          `http://localhost:3000/deleteVehiculo?borrar=${placaVehiculo}`,
-          {
-            method: "DELETE",
+        try {
+          const fetchingBorrado = await fetch(
+            `http://localhost:3000/deleteVehiculo?borrar=${placaVehiculo}`,
+            {
+              method: "DELETE",
+            }
+          );
+          if (!fetchingBorrado.ok) throw new Error("Lol");
+          const repuestaBorrrado = await fetchingBorrado.json();
+
+          const dialog = document.getElementById("dialog");
+          const imagenDialog = document.getElementById("dialog__img");
+          const parrafoDialog = document.getElementById("dialog__p");
+          const btnCerrar = document.getElementById("cerrar-dialog");
+          const cardVehiculo = event.target.closest(".card__vehiculo");
+
+          btnCerrar.addEventListener("click", () => dialog.close());
+          parrafoDialog.textContent = repuestaBorrrado.mensaje;
+          dialog.showModal();
+          if (!repuestaBorrrado.status) {
+            imagenDialog.setAttribute(
+              "src",
+              "../../src/Assets/icons/equis.svg"
+            );
+            btnCerrar.style.backgroundColor = "red";
+            return;
           }
-        );
-        const borrado = await fetchingBorrado.text();
-        console.log(borrado);
+          imagenDialog.setAttribute("src", "../../src/assets/icons/check.svg");
+          btnCerrar.style.backgroundColor = "green";
+          cardVehiculo.remove();
+        } catch (e) {
+          console.error(e);
+        }
       });
 
       sectionBuscados.append(nuevo);
     }
-  });
+  } catch (e) {
+    return (fragmento.textContent = "No conect");
+  }
 
   return fragmento;
 }
