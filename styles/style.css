@@ -5,14 +5,13 @@
   background-color: #242424;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
-body{
+body {
   padding: 24px 28px;
   min-height: 800px;
   display: flex;
@@ -21,30 +20,35 @@ body{
   gap: 100px;
   background-color: #f5f5f5;
   color: #000000;
-
 }
 
-
-
-#header{
+#header {
   box-sizing: border-box;
   position: fixed;
   padding-bottom: 30px;
   width: 100%;
   height: 80px;
   top: 0px;
-  background-color:#f5f5f5;
+  background-color: #f5f5f5;
   z-index: 10;
 }
-.header__content{
+.header__content {
+  position: relative;
   width: 100%;
   height: 60px;
   background-color: #ffffff;
-
 }
 
+#menu {
+  width: 150px;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  padding: 10px 20px;
+  color: black;
+}
 
-#app{
+#app {
   margin-top: 70px;
   padding: 10px;
   width: 100%;
@@ -52,7 +56,7 @@ body{
   gap: 30px;
 }
 
-.panel-control{
+.panel-control {
   position: sticky;
   top: 80px;
   height: max-content;
@@ -64,25 +68,21 @@ body{
   color: black;
   background-color: #ffffff;
   border-radius: 8px;
-
 }
 
-.panel-control #panel-control__ul{
+.panel-control #panel-control__ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
 
-  li{
+  li {
     width: 100%;
     height: 40px;
     list-style: none;
-
-
   }
-
 }
 
-.li__btn{
+.li__btn {
   position: relative;
   border: none;
   width: 100%;
@@ -90,35 +90,29 @@ body{
   text-align: center;
   background-color: #ffffff;
 
-  &:hover{
+  &:hover {
     background-color: #f5f5f5;
-
   }
-
 }
 
-#panel-variable{
+#panel-variable {
   width: 100%;
   min-width: 220px;
-
 
   background-color: #ffffff;
   border: solid black 1px;
   color: black;
 }
 
-
-
 /* las clase active de los botones del panel control */
-.active{
+.active {
+  font-size: 18px;
+  width: 100%;
+  color: blue;
+  background-color: #d8d8d8;
+  transition: all 0.2s linear;
 
-    font-size: 18px;
-    width: 100%;
-    color: blue;
-    background-color: #d8d8d8;
-    transition: all 0.2s linear;
-
-  &::before{
+  &::before {
     content: "";
     position: absolute;
     bottom: 0px;
@@ -132,53 +126,89 @@ body{
   }
 }
 
-#dialog{
+.notificacion {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  height: 70px;
+  width: 30%;
+  p {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+  }
+}
+
+@keyframes notificacionAnimacionEntrada {
+  from {
+    transform: translateX(300px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes notificacionAnimacionSalida {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(600px);
+    opacity: 0.4;
+  }
+}
+
+#dialog {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 4px 10px;
   width: 45%;
-  max-width: 300px; 
+  max-width: 300px;
   background-color: white;
   border-radius: 18px;
 
   animation: show-modal 0.4s linear;
 
-  
-  &::backdrop{
+  &::backdrop {
     background-color: #242424bb;
   }
 }
 
 @keyframes show-modal {
-  0%{
+  0% {
     scale: 0.7;
     opacity: 0;
     top: 0%;
   }
-  100%{
+  100% {
     scale: 1;
     opacity: 1;
     top: 50%;
   }
-  
 }
 
-#dialog__img{
+#dialog__img {
   width: 20%;
   position: relative;
   left: 50%;
   top: 50%;
   transform: translateX(-50%);
 }
-#dialog__p{
+#dialog__p {
   width: 100%;
   color: black;
   font-size: 18px;
   text-align: center;
 }
-#cerrar-dialog{
+#cerrar-dialog {
   margin-top: 16px;
   width: 100%;
   padding: 10px 20px;
@@ -190,46 +220,466 @@ body{
 
   transition: all 0.2s ease-out;
 
-  &:hover{
+  &:hover {
     filter: brightness(120%);
-
   }
 }
 
+.class_btn_aceptar {
+  position: relative;
+  z-index: 2;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  background-color: transparent;
+  transition: all 0.3s ease-in;
 
+  &:hover {
+    color: white;
+  }
 
+  &::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 0px;
+    height: 100%;
+    transition: all 0.3s ease-in;
+  }
+  &:hover::before {
+    width: 100%;
+    background-color: #70a1e9;
+  }
+}
 
-@media(max-width: 800px){
-  .panel-control{
+.class_btn_cerrar {
+  color: white;
+  font-weight: 600;
+  background-color: rgb(197, 63, 53);
+  transition: all 0.3s ease-in;
+
+  &:hover {
+    background-color: #f70404;
+  }
+}
+
+@media (max-width: 800px) {
+  .panel-control {
     position: fixed;
+    top: 110px;
     z-index: 10;
     width: 40%;
-    border: solid black 1px;
   }
 
-  #menu{
-    width: 150px;
-    position: relative;
-    top: 0px;
-    padding: 10px 20px;
-    color: black;
-  }
-
-  .panel-control #panel-control__ul{
+  .panel-control #panel-control__ul {
     gap: 15px;
   }
 }
 
-.maxcontent{
+.maxcontent {
   width: max-content;
 }
 
-
-
-
-@media(max-width: 490px){
-
-  body{
+@media (max-width: 490px) {
+  body {
     padding: 24px 18px;
+  }
+
+  .panel-control {
+    top: 110px;
+    position: fixed;
+    left: 0;
+    z-index: 10;
+    width: 60%;
+  }
+}
+
+#dialog_add {
+  padding: 10px 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  background-color: rgb(236, 236, 236);
+  border-radius: 12px;
+
+  &::backdrop {
+    background-color: #00000091;
+  }
+  h3 {
+    padding: 0 10px;
+  }
+  figure {
+    padding: 10px;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .div_error {
+    padding: 0 10px;
+    width: 100%;
+    height: 20px;
+
+    p {
+      display: none;
+      background-color: rgb(98, 252, 119);
+      justify-content: center;
+      width: 100%;
+      border-radius: 12px;
+      border: solid black 1px;
+      color: black;
+      font-size: 13px;
+    }
+  }
+
+  form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px 10px;
+
+    .div_form {
+      display: flex;
+      width: 100%;
+
+      & > * {
+        box-sizing: border-box;
+        padding: 4px;
+        height: 33px;
+      }
+
+      label {
+        font-size: 12px;
+        width: 40%;
+        background-color: rgb(179, 179, 179);
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+        border: solid black 1px;
+        border-right: none;
+      }
+      input,
+      select {
+        text-align: center;
+        border: none;
+        width: 100%;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border: solid black 1px;
+        border-left: none;
+      }
+    }
+
+    nav {
+      margin-top: 24px;
+      display: flex;
+      gap: 6px;
+
+      button {
+        padding: 4px;
+        border-radius: 4px;
+      }
+    }
+
+    .cerrar {
+      width: 40%;
+    }
+    .agregar {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes div_errorEntrada {
+  from {
+    scale: 0.6;
+    opacity: 0.5;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+@keyframes div_errorSalida {
+  from {
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    scale: 0.5;
+    opacity: 0.7;
+  }
+}
+
+.main-usuarios {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h3 {
+    width: 100%;
+  }
+
+  .section_usuarios {
+    width: 100%;
+    overflow-x: scroll;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 8px;
+
+    #btn_agregar_usuario {
+      position: fixed;
+      bottom: 10px;
+      right: 5%;
+      width: 40px;
+      background-color: transparent;
+      border: none;
+      img {
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+      }
+    }
+
+    .targets-data {
+      background-color: #a5a5a5;
+      color: white;
+      width: 100%;
+      min-width: 700px;
+      height: 40px;
+      padding-left: 13%;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      border-radius: 8px;
+
+      p {
+        font-weight: 700;
+        width: 120px;
+      }
+
+      .data-nombres {
+        width: 140px;
+      }
+      .data-email {
+        width: 160px;
+      }
+    }
+    .targets-usuarios {
+      max-width: 1200px;
+      min-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .target-usuario {
+      padding: 0 10px;
+      width: 100%;
+      height: 80px;
+      display: flex;
+      justify-content: start;
+      background-color: #5c29e9;
+      border: solid rgb(7, 7, 7) 2px;
+      border-radius: 18px;
+      overflow: hidden;
+
+      .target-figure {
+        width: 10%;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          object-fit: contain;
+          width: 80%;
+          height: auto;
+          background-color: #242424;
+          border-radius: 50%;
+        }
+      }
+
+      .target-text {
+        padding-right: 2%;
+        padding-left: 30px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+
+        p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 120px;
+        }
+        .nombres {
+          width: 140px;
+        }
+        .email {
+          width: 160px;
+        }
+      }
+      .target-acciones {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        width: 16%;
+
+        button {
+          border-top-right-radius: 8px;
+          border-bottom-right-radius: 8px;
+          width: 100%;
+          height: 30px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    #dialog_add {
+      width: 50%;
+    }
+
+    .section_usuarios {
+      overflow-x: hidden;
+      .targets-data {
+        display: none;
+      }
+      .targets-usuarios {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        min-width: 400px;
+      }
+      .target-usuario {
+        padding-right: 4px;
+        width: calc(50% - 5px);
+        gap: 4px;
+        height: 80px;
+
+        .target-figure {
+          padding: 6px;
+          width: 20%;
+          min-width: 40px;
+          img {
+            width: 100%;
+          }
+        }
+        .target-text {
+          padding: 0;
+          flex-direction: column;
+          justify-content: center;
+          align-items: start;
+          gap: 10px;
+          font-size: 15px;
+          width: 100%;
+
+          p,
+          .nombres {
+            text-align: start;
+            width: 100px;
+          }
+          .email {
+            display: none;
+          }
+        }
+        .target-acciones {
+          width: 30%;
+          padding: 0;
+
+          button {
+            width: 100%;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 590px) {
+    #dialog_add {
+      width: 70%;
+      min-width: 280px;
+    }
+
+    .section_usuarios {
+      flex-direction: column;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .targets-usuarios {
+        padding: 12px;
+        min-width: 200px;
+      }
+
+      .target-usuario {
+        padding: 8px;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 4px;
+        height: auto;
+        border-radius: 20px;
+
+        .target-figure {
+          justify-content: center;
+          padding: 6px;
+          width: 100%;
+          min-width: 80px;
+          border-radius: 12px;
+          img {
+            width: 40%;
+          }
+        }
+        .target-text {
+          padding: 0 5px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: start;
+          gap: 10px;
+          font-size: 15px;
+          width: 100%;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+
+          p {
+            text-align: start;
+            width: 100px;
+            width: 100%;
+          }
+          .email {
+            display: none;
+          }
+        }
+        .target-acciones {
+          width: 100%;
+          gap: 8px;
+          padding: 0;
+          flex-direction: row;
+          justify-content: start;
+
+          button {
+            border-radius: 4px;
+          }
+        }
+      }
+    }
   }
 }

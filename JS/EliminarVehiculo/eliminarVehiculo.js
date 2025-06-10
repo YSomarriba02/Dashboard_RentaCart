@@ -56,8 +56,10 @@ export async function eliminarVehiculo() {
 
     const sectionBuscados = mainEliminar.querySelector(".section-buscados");
 
-    for (let i = 0; i < repuesta.length; i++) {
-      const vehiculo = repuesta[i];
+    for (let i = 0; i < repuesta.vehiculosDisponibles.length; i++) {
+      const vehiculo = repuesta.vehiculosDisponibles[i];
+      console.log("Entro aqui");
+      console.log(vehiculo);
       const nombreMarca = vehiculo.Marca.marca;
       const nombreModelo = vehiculo.Modelo.modelo;
       const dataConcat = `${nombreMarca} ${nombreModelo}`;

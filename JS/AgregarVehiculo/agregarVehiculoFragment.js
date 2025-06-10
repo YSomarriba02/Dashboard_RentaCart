@@ -1,6 +1,155 @@
-import "../../styles/agregarVehiculo.css";
-
 export const agregarVehiculo = document.createRange().createContextualFragment(`
+
+<style>
+        
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-agregarVehiculo {
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  button {
+    padding: 10px 30px;
+    margin-left: auto;
+    width: 30%;
+    border-radius: 8px;
+    border: solid transparent 2px;
+    font-weight: 600;
+    transition: all 0.2s ease-in;
+    &:hover {
+      border: solid rgb(0, 0, 0) 2px;
+      background-color: #70a1e9;
+      color: white;
+    }
+  }
+}
+
+.div-form {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid black;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+}
+
+.input-box {
+  display: flex;
+  gap: 10px;
+
+  label {
+    width: 40%;
+    font-weight: 600;
+    display: flex;
+    align-items: end;
+  }
+  input,
+  select,
+  textarea {
+    width: 40%;
+    padding: 14px 10px;
+    text-align: center;
+    border-radius: 6px;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    height: 50px;
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+#input-color-envoltorio {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 2px 2px 6px 3px rgb(78, 78, 78);
+}
+#color {
+  min-width: 80px;
+  min-height: 80px;
+}
+
+@media (max-width: 800px) {
+  .main-agregarVehiculo {
+    gap: 30px;
+  }
+
+  form {
+    gap: 40px;
+  }
+
+  .div-form {
+    gap: 20px;
+  }
+
+  .input-box {
+    label {
+      font-size: 18px;
+    }
+    input,
+    select,
+    textarea {
+      font-size: 18px;
+      width: 60%;
+    }
+  }
+}
+
+@media (max-width: 490px) {
+  .main-agregarVehiculo {
+    padding: 12px 10px;
+  }
+
+  form {
+    gap: 30px;
+  }
+
+  .div-form {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .input-box {
+    flex-direction: column;
+
+    label {
+      width: 100%;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 5px 10px;
+      text-align: start;
+      font-size: 16px;
+    }
+  }
+}
+
+        </style>
         <main class="main-agregarVehiculo">
             <h3>Agregar Vehiculo</h3>
 
@@ -15,7 +164,7 @@ export const agregarVehiculo = document.createRange().createContextualFragment(`
 
                     <div class="input-box">
                         <label for="marca">Seleccione Marca</label>
-                        <select name="marca" id="marca">
+                        <select name="marca" id="select_marca">
                         </select>
                     </div>
                     <div class="input-box">

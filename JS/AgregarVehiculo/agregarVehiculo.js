@@ -4,7 +4,7 @@ import { fetchModelos } from "./fetchModelos.js";
 
 export const agregarV = async () => {
   const fragmento = agregarVehiculo.cloneNode(true);
-  const marca = fragmento.getElementById("marca");
+  const marca = fragmento.getElementById("select_marca");
   const modelo = fragmento.getElementById("modelo");
   const tipo = fragmento.getElementById("tipo");
 
@@ -26,7 +26,7 @@ export const agregarV = async () => {
 
     const formulario = new FormData(form);
 
-    const fetching = await fetch("http://localhost:3000/setv", {
+    const fetching = await fetch("http://localhost:3000/setVehiculo", {
       method: "POST",
       body: formulario,
     });

@@ -3,66 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css" />
-    <title>Vite App</title>
+    <link rel="stylesheet" href="./styles/iniciar_sesion.css" />
+    <title>Inicia Sesion</title>
   </head>
   <body>
-    <header id="header">
-      <div class="header__content"></div>
-    </header>
+    <form id="form-iniciar-sesion">
+      <h3>Iniciar sesion</h3>
+      <label for="usuario">Ingrece su correo</label>
+      <input type="text" id="correo" name="correo" required />
 
-    <div id="app">
-      <section class="panel-control">
-        <button id="menu">Btn</button>
-        <ul id="panel-control__ul">
-          <li><button class="li__btn" id="ir-inicio">Inicio</button></li>
-          <li>
-            <button class="li__btn" id="ir_agregarVehiculo">
-              Agregar Vehiculo
-            </button>
-          </li>
-          <li>
-            <button class="li__btn" id="ir_eliminarVehiculo">
-              Eliminar Vehiculo
-            </button>
-          </li>
-          <li><button class="li__btn">Monitorear</button></li>
-          <li><button class="li__btn">Agregar Usuario</button></li>
-          <li><button class="li__btn">Eliminar Usuario</button></li>
-          <li><button class="li__btn">Ver Usuarios</button></li>
-          <li><button class="li__btn">Agregar Marca</button></li>
-          <li><button class="li__btn">Eliminar Marca</button></li>
-        </ul>
-      </section>
-      <div id="panel-variable"></div>
-    </div>
+      <label for="contraseña">Ingrese su contraseña</label>
+      <input type="password" id="contrasena" name="contrasena" required />
+      <nav id="buttons-opciones">
+        <button type="submit">Ingresar</button>
+      </nav>
+    </form>
 
-    <dialog id="dialog">
-      <img src="" alt="" id="dialog__img" />
-      <p id="dialog__p"></p>
-      <button id="cerrar-dialog" class="btn-dialog">Cerrar</button>
-    </dialog>
-
-    <script type="module" src="/main.js"></script>
-
-    <script>
-      let estado = true;
-      const btn = document.querySelector("#menu");
-      const panelControl = document.querySelector(".panel-control");
-      const ul = document.querySelector("ul");
-      const lis = ul.querySelectorAll("li");
-
-      btn.addEventListener("click", () => {
-        if (estado) {
-          estado = false;
-          ul.style.display = "none";
-          panelControl.classList.add("maxcontent");
-          return;
-        }
-        estado = true;
-        ul.style.display = "flex";
-        panelControl.classList.remove("maxcontent");
-      });
-    </script>
+    <script type="module" src="./JS/index.js"></script>
   </body>
 </html>
